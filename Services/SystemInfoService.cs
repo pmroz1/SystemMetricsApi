@@ -1,4 +1,5 @@
 ﻿using Hardware.Info;
+using SystemMetricsApi.Abstract.Services;
 using SystemMetricsApi.Dto;
 
 namespace SystemMetricsApi.Services;
