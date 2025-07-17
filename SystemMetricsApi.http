@@ -1,0 +1,6 @@
+@SystemMetricsApi_HostAddress = http://localhost:5108
+
+GET {{SystemMetricsApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
