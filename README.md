@@ -1,31 +1,37 @@
 # SystemMetricsApi
 
-A simple ASP.NET Core Web API for collecting and exposing system metrics.
+![Build Status](https://github.com/YOUR_USERNAME/SystemMetricsApi/actions/workflows/ci-cd.yml/badge.svg)
 
-## Requirements
+A lightweight .NET 8 API for retrieving system metrics including CPU and memory information.
 
-- .NET 8.0 SDK
+## Features
 
-## Setup
+- Real-time system metrics
+- API key authentication
+- Self-contained deployment
+- Swagger documentation
 
-1. Clone the repository:
-   ```powershell
-   git clone <repository-url>
-   cd SystemMetricsApi
-   ```
-2. Restore dependencies and build:
-   ```powershell
-   dotnet restore; dotnet build
-   ```
-3. Run the API:
-   ```powershell
-   dotnet run
-   ```
+## Quick Start
 
-## Usage
+### Running locally
+```bash
+dotnet run
+```
 
-Use an HTTP client or the `SystemMetricsApi.http` file for example requests. The API exposes endpoints under `/metrics` to retrieve system information.
+### API Usage
+```bash
+curl -H "X-API-KEY: your-secret-key" https://localhost:7000/metrics
+```
 
-## License
+## Configuration
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Set your API key in `appsettings.json`:
+```json
+{
+  "ApiKey": "your-secret-key"
+}
+```
+
+## Build Status
+
+The project uses GitHub Actions for CI/CD. The badge above shows the current build status.
