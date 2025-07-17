@@ -1,6 +1,6 @@
 # SystemMetricsApi
 
-![Build Status](https://github.com/YOUR_USERNAME/SystemMetricsApi/actions/workflows/ci-cd.yml/badge.svg)
+![Build Status](https://github.com/pmroz1/SystemMetricsApi/actions/workflows/ci-cd.yml/badge.svg)
 
 A lightweight .NET 8 API for retrieving system metrics including CPU and memory information.
 
