@@ -4,10 +4,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddExceptionHandling();
+
 
 var app = builder.Build();
-
-app.RegisterExceptionHandlingMiddleware();
+app.RegisterExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {

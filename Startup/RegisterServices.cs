@@ -4,9 +4,16 @@ namespace SystemMetricsApi.Startup;
 
 public static class RegisterServices
 {
-    public static WebApplication RegisterExceptionHandlingMiddleware(this WebApplication app)
+    public static IServiceCollection AddExceptionHandling(this IServiceCollection services)
     {
-        app.UseMiddleware<ExceptionHandlingMiddleware>();
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddProblemDetails();
+        return services;
+    }
+
+    public static WebApplication RegisterExceptionHandler(this WebApplication app)
+    {
+        app.UseExceptionHandler();
         return app;
     }
 }

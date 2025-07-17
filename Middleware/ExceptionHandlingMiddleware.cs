@@ -1,24 +1,26 @@
-﻿namespace SystemMetricsApi.Middleware;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 
-public class ExceptionHandlingMiddleware(
-    RequestDelegate next,
-    ILogger<ExceptionHandlingMiddleware> logger
-){
-    public async Task InvokeAsync(HttpContext context)
+namespace SystemMetricsApi.Middleware;
+
+internal sealed class GlobalExceptionHandler(
+    ILogger<GlobalExceptionHandler> logger
+) : IExceptionHandler
+{
+    public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {
-        try
+        logger.LogError(exception, "An unhandled exception occurred.");
+
+        var problemDetails = new ProblemDetails
         {
-            await next(context);
-        }
-        catch (Exception e) {
-            logger.LogError(e, "An unhandled exception occurred while processing the request.");
-            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            context.Response.ContentType = "application/json";
-            var errorResponse = new
-            {
-                Message = "An unexpected error occurred. Please try again later."
-            };
-            await context.Response.WriteAsJsonAsync(errorResponse);
-        }
+            Status = StatusCodes.Status500InternalServerError,
+            Title = "Server Error",
+        };
+
+        httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+
+        await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken: cancellationToken);
+
+        return true;
     }
 }
