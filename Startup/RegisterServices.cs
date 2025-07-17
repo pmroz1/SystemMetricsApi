@@ -26,4 +26,10 @@ public static class RegisterServices
         services.AddScoped<ISystemInfoService, SystemInfoService>();
         return services;
     }
+
+    public static WebApplication SetupApiKeyMiddleware(this WebApplication app)
+    {
+        app.UseMiddleware<ApiKeyMiddleware>();
+        return app;
+    }
 }
